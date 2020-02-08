@@ -17,7 +17,7 @@ function xmlRequest() {
 
 document.getElementById('xml').addEventListener('click', () => {
   xmlRequest();
-});
+document.getElementById('xml').addEventListener('click', xmlRequest);
 // -------------------------Using Axios---------------------
 
 function axiosRequest() {
