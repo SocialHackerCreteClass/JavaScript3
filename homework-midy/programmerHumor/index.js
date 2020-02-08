@@ -10,7 +10,6 @@ xhr.onreadystatechange = () => {
     const image = document.createElement('img');
     image.setAttribute('src', JSON.parse(xhr.response).img);
     document.body.appendChild(image);
-    console.log(JSON.parse(xhr.response, null, '\t'));
   }
 };
 xhr.open('GET', url + randomComicNumber);
