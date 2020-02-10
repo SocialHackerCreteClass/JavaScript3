@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.alert-error {
+    color: #A62C23;
+    background-color: #FADADD;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.25rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin: 0.2rem;
+    line-height: 2rem;
+    font-size: 1.25rem;
+    border-radius: 3px;
+    box-shadow: 10px 5px 5px gray;
+}
+
+@media (max-width: 200px) {
+    .updated {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .description {
+        display: none;
+    }
+}
