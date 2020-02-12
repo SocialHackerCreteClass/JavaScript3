@@ -16,10 +16,12 @@
     xhr.send();
   }
 
+  //the options = {} means that it is an object.
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
     Object.entries(options).forEach(([key, value]) => {
+      //gia kathe object entry tou object, diladi gia kathe zeygari opws [[name:nikos], [age:25], [key:value]]
       if (key === 'text') {
         elem.textContent = value;
       } else {
