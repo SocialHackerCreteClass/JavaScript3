@@ -56,8 +56,6 @@
           class: 'alert-error',
         });
         return;
-
-        //continue from here-----------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       }
       const ul = createAndAppend('ul', root);
 
@@ -77,10 +75,7 @@
       repos = reposIndices;
       console.log(repos);
 
-      //console.log(repos);
-
       repos.forEach(repo => renderRepoDetails(repo, ul));
-      //console.log(`thse are the repos ${repos}`);
     });
   }
 
