@@ -33,9 +33,9 @@
 
   function renderRepoDetails(repo, ul) {
     createAndAppend('li', ul, { text: repo.name });
-    createAndAppend('li', ul, { text: repo.description });
-    createAndAppend('li', ul, { text: repo.forks });
-    createAndAppend('li', ul, { text: repo.updated_at });
+    createAndAppend('p', ul, { text: repo.description });
+    createAndAppend('p', ul, { text: repo.forks });
+    createAndAppend('p', ul, { text: repo.updated_at });
   }
 
   //from now on the function calls are starting---------------------------------------------------------------------------------------
