@@ -17,7 +17,7 @@
   }
 
   //the options = {} means that it is an object.
-  function createAndAppend(name, descriptionTag, parent, options = {}) {
+  function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
     Object.entries(options).forEach(([key, value]) => {
@@ -32,10 +32,10 @@
   }
 
   function renderRepoDetails(repo, ul) {
-    createAndAppend('li', ul, { text: repo.name });
-    createAndAppend('p', ul, { text: repo.description });
-    createAndAppend('p', ul, { text: repo.forks });
-    createAndAppend('p', ul, { text: repo.updated_at });
+    createAndAppend('li', ul, { text: ` Repository : ${repo.name}` });
+    createAndAppend('p', ul, { text: `Description : ${repo.description}` });
+    createAndAppend('p', ul, { text: `Forks : ${repo.forks}` });
+    createAndAppend('p', ul, { text: `Update at : ${repo.updated_at}` });
   }
 
   //from now on the function calls are starting---------------------------------------------------------------------------------------
