@@ -33,6 +33,9 @@
 
   function renderRepoDetails(repo, ul) {
     createAndAppend('li', ul, { text: repo.name });
+    createAndAppend('li', ul, { text: repo.description });
+    createAndAppend('li', ul, { text: repo.forks });
+    createAndAppend('li', ul, { text: repo.updated_at });
   }
 
   //from now on the function calls are starting---------------------------------------------------------------------------------------
@@ -53,10 +56,10 @@
           class: 'alert-error',
         });
         return;
+
+        //continue from here-----------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       }
       const ul = createAndAppend('ul', root);
-
-      repos.forEach(repo => renderRepoDetails(repo, ul));
 
       repos.sort(function(a, b) {
         return a['name'].toUpperCase() > b['name'].toUpperCase()
@@ -65,12 +68,19 @@
           ? -1
           : 0;
       });
-      for (let i = 0; i < 10; i++) {
-        console.log(`Name : ${repos[i]['name']}`);
-        console.log(`Description : ${repos[i]['description']}`);
-        console.log(`Forks : ${repos[i]['forks']}`);
-        console.log(`Updated at : ${repos[i]['updated_at']}`);
+
+      let reposIndices = [];
+      for (let x = 0; x < 10; x++) {
+        reposIndices.push(repos[x]);
       }
+
+      repos = reposIndices;
+      console.log(repos);
+
+      //console.log(repos);
+
+      repos.forEach(repo => renderRepoDetails(repo, ul));
+      //console.log(`thse are the repos ${repos}`);
     });
   }
 
