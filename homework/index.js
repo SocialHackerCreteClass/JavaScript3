@@ -7,7 +7,7 @@
     xhr.responseType = 'json';
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status <= 299) {
-        cb(null, xhr.response);
+        cb(null, xhr.response); // if everything works well here is supposed to return the response in a JSON format
       } else {
         cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
       }
@@ -35,8 +35,17 @@
     createAndAppend('li', ul, { text: repo.name });
   }
 
+  //from now on the function calls are starting---------------------------------------------------------------------------------------
+
+  let reposBanner = document.createElement('H1');
+  reposBanner.innerHTML = 'HYF REPOSITORIES';
+  document.getElementById('root').appendChild(reposBanner);
+  reposBanner.className += 'banner';
+
   function main(url) {
     fetchJSON(url, (err, repos) => {
+      //to repos anaferetai sto xhr.response
+      //olo ayto einai meros ths cb(callback function)
       const root = document.getElementById('root');
       if (err) {
         createAndAppend('div', root, {
@@ -46,7 +55,22 @@
         return;
       }
       const ul = createAndAppend('ul', root);
+
       repos.forEach(repo => renderRepoDetails(repo, ul));
+
+      repos.sort(function(a, b) {
+        return a['name'].toUpperCase() > b['name'].toUpperCase()
+          ? 1
+          : b['name'].toUpperCase() > a['name'].toUpperCase()
+          ? -1
+          : 0;
+      });
+      for (let i = 0; i < 10; i++) {
+        console.log(`Name : ${repos[i]['name']}`);
+        console.log(`Description : ${repos[i]['description']}`);
+        console.log(`Forks : ${repos[i]['forks']}`);
+        console.log(`Updated at : ${repos[i]['updated_at']}`);
+      }
     });
   }
 

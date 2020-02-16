@@ -1,3 +1,9 @@
 .alert-error {
   color: red;
 }
+
+.banner {
+  background-color: blue;
+  color: white;
+  padding: 3%;
+}
