@@ -7,7 +7,7 @@
     xhr.responseType = 'json';
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status <= 299) {
-        cb(null, xhr.response); // if everything works well here is supposed to return the response in a JSON format
+        cb(null, xhr.response);
       } else {
         cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
       }
