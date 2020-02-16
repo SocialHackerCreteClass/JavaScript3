@@ -17,7 +17,7 @@
   }
 
   //the options = {} means that it is an object.
-  function createAndAppend(name, parent, options = {}) {
+  function createAndAppend(name, descriptionTag, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
     Object.entries(options).forEach(([key, value]) => {
