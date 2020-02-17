@@ -16,12 +16,10 @@
     xhr.send();
   }
 
-  //the options = {} means that it is an object.
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
     Object.entries(options).forEach(([key, value]) => {
-      //gia kathe object entry tou object, diladi gia kathe zeygari opws [[name:nikos], [age:25], [key:value]]
       if (key === 'text') {
         elem.textContent = value;
       } else {
@@ -40,8 +38,6 @@
     createAndAppend('p', ul, { text: `Forks : ${repo.forks}` });
     createAndAppend('p', ul, { text: `Update at : ${repo.updated_at}` });
   }
-
-  //from now on the function calls are starting---------------------------------------------------------------------------------------
 
   let reposBanner = document.createElement('H1');
   reposBanner.innerHTML = 'HYF REPOSITORIES';
