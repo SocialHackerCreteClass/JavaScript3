@@ -36,7 +36,10 @@
     a.setAttribute('target', '_blank');
     createAndAppend('p', ul, { text: `Description : ${repo.description}` });
     createAndAppend('p', ul, { text: `Forks : ${repo.forks}` });
-    createAndAppend('p', ul, { text: `Update at : ${repo.updated_at}` });
+    var dateobj = new Date(repo.updated_at);
+    var updateDate = dateobj.toUTCString();
+
+    createAndAppend('p', ul, { text: `Update at : ${updateDate}` });
   }
 
   let reposBanner = document.createElement('H1');
@@ -46,8 +49,7 @@
 
   function main(url) {
     fetchJSON(url, (err, repos) => {
-      //to repos anaferetai sto xhr.response
-      //olo ayto einai meros ths cb(callback function)
+      // "repos" is a referrence to xhr response. all this is part of the predefined callback function
       const root = document.getElementById('root');
       if (err) {
         createAndAppend('div', root, {
@@ -57,11 +59,10 @@
         return;
       }
       const ul = createAndAppend('ul', root);
-
       repos.sort(function(a, b) {
-        return a['name'].toUpperCase() > b['name'].toUpperCase()
+        return a.name.toUpperCase() > b.name.toUpperCase()
           ? 1
-          : b['name'].toUpperCase() > a['name'].toUpperCase()
+          : b.name.toUpperCase() > a.name.toUpperCase()
           ? -1
           : 0;
       });
@@ -73,6 +74,13 @@
 
       repos = reposIndices;
       console.log(repos);
+
+      const select = createAndAppend('select', ul);
+
+      repos.forEach(repo => {
+        select.innerHTML += `<option> ${repo.name}</option>`;
+        console.log(repo);
+      });
 
       repos.forEach(repo => renderRepoDetails(repo, ul));
     });
