@@ -3,6 +3,9 @@
 const select = createAndAppend('select', ul);
 
 repos.forEach(repo => {
-  select.innerHTML += `<option> ${repo.name}</option>`;
+  let option = document.createElement('option');
+  option = repo.name;
+  option.value = repo.name;
+  select.appendChild(option);
   console.log(repo);
 });

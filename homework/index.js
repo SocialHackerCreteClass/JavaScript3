@@ -78,11 +78,21 @@
       const select = createAndAppend('select', ul);
 
       repos.forEach(repo => {
-        select.innerHTML += `<option> ${repo.name}</option>`;
-        console.log(repo);
-      });
+        let option = document.createElement('option');
+        option.innerHTML = repo.name;
+        option.value = repo.name;
+        select.appendChild(option);
 
-      repos.forEach(repo => renderRepoDetails(repo, ul));
+        const selectElement = document.querySelector('select');
+
+        selectElement.addEventListener('change', event => {
+          const result = option;
+          if (repo.name == event.target.value) {
+            console.log(repo);
+            renderRepoDetails(repo, ul);
+          }
+        });
+      });
     });
   }
 
