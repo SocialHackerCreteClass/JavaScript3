@@ -1,5 +1,7 @@
 .alert-error {
   color: red;
+  background-color: pink;
+  padding: 2vh;
 }
 
 .banner {
@@ -8,7 +10,17 @@
   padding: 3%;
 }
 
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
 li {
-  color: red;
   font-weight: bolder;
+  border-style: groove;
+  list-style-type: none;
+  display: inline-block;
+  margin: auto;
+  padding: 1.5vw;
+  margin-left: 0;
 }

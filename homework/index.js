@@ -33,6 +33,9 @@
 
   function renderRepoDetails(repo, ul) {
     createAndAppend('li', ul, { text: ` Repository : ${repo.name}` });
+    let a = createAndAppend('a', ul, { text: repo.name });
+    a.setAttribute('href', repo.html_url);
+    a.setAttribute('target', '_blank');
     createAndAppend('p', ul, { text: `Description : ${repo.description}` });
     createAndAppend('p', ul, { text: `Forks : ${repo.forks}` });
     createAndAppend('p', ul, { text: `Update at : ${repo.updated_at}` });
