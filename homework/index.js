@@ -83,12 +83,9 @@
         option.value = repo.name;
         select.appendChild(option);
 
-        const selectElement = document.querySelector('select');
-
-        selectElement.addEventListener('change', event => {
-          const result = option;
-          if (repo.name == event.target.value) {
-            console.log(repo);
+        let selectBtn = document.querySelector('select');
+        selectBtn.addEventListener('change', () => {
+          if (selectBtn.value == repo.name) {
             renderRepoDetails(repo, ul);
           }
         });
