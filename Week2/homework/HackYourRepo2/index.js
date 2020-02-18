@@ -21,7 +21,12 @@
                 'Content-Type': 'application/json',
             }
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw response
+                }
+                return response.json()
+            })
             .then((data) => {
                 cb(null, data);
             })
@@ -133,7 +138,6 @@
 
         fetchJSON(url, (err, repos) => {
             const root = document.getElementById('root');
-
             // CREATE THE HEADER
             const hyfElem = createAndAppend('div', root, {
                 text: `HYF Repositories`,
