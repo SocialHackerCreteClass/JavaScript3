@@ -30,7 +30,6 @@
   }
 
   function renderRepoDetails(repo, parent) {
-    console.log(repo);
     createAndAppend('div', parent, {
       text: `
       <b>Repository:</b> <a href="${repo.html_url}" target="_blank">${repo.name}</a><br>
