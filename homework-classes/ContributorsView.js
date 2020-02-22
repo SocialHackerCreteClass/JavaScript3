@@ -19,8 +19,13 @@
      * @param {Object[]} contributors An array of contributor objects
      */
     render(contributors) {
-      // TODO: replace this comment and the console.log with your own code
-      console.log('ContributorsView', contributors);
+      contributors.forEach(contributor => {
+        createAndAppend('li', document.getElementById('contributors-list'), {
+          text: `<img src="${contributor.avatar_url}" alt="${contributor.login}">
+          <a target="_blank" href="${contributor.html_url}">${contributor.login}</a>
+          <b>${contributor.contributions}</b>`
+        });
+      })
     }
   }
 

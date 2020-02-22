@@ -41,7 +41,7 @@
     });
   }
 
-  function renderContributorsDetails(contributor, parent){
+  function renderContributorsDetails(contributor, parent) {
     createAndAppend('li', parent, {
       text: `<img src="${contributor.avatar_url}" alt="${contributor.login}">
       <a target="_blank" href="${contributor.html_url}">${contributor.login}</a>

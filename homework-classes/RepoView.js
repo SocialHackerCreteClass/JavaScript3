@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  const { createAndAppend } = window.Util;
+  const { createAndAppend, formatDate } = window.Util;
 
   class RepoView {
     constructor(container) {
@@ -19,8 +19,14 @@
      * @param {Object} repo A repository object.
      */
     render(repo) {
-      // TODO: replace this comment and the console.log with your own code
-      console.log('RepoView', repo);
+      createAndAppend('div', document.getElementById('root'), {
+        text: `
+        <b>Repository:</b> <a href="${repo.html_url}" target="_blank">${repo.name}</a><br>
+        <b>Description:</b> ${repo.description}<br>
+        <b>Forks:</b> ${repo.forks_count}<br>
+        <b>Updated:</b> ${formatDate(repo.updated_at)}`,
+        class: 'repo'
+      });
     }
   }
 

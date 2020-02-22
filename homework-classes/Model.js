@@ -39,13 +39,12 @@
       this.notify(this.state);
     }
 
-    static fetchJSON(url) {
-      return fetch(url).then(res => {
-        if (!res.ok) {
-          return new Error(`HTTP ${res.status} - ${res.statusText}`);
-        }
-        return res.status === 200 ? res.json() : null;
-      });
+    static async fetchJSON(url) {
+      const fetched = await fetch(url);
+      if (!fetched.ok) {
+        return new Error(`HTTP ${fetched.status} - ${fetched.statusText}`);
+      }
+      return fetched.status === 200 ? fetched.json() : null;
     }
   }
 
