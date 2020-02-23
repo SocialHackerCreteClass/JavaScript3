@@ -8,15 +8,32 @@
   background-color: blue;
   color: white;
   padding: 3%;
+  display: flex;
+  justify-content: left;
+  width: 45%;
+}
+
+.repos {
+  float: left;
+}
+
+.contributors {
+  float: right;
 }
 
 ul {
   display: flex;
   flex-direction: column;
+  border-width: 2px;
+  border-style: groove;
+  padding: 2vw;
+  width: 45%;
 }
 
 select {
   padding: 5px;
+  width: 10vw;
+  margin-left: 1.5vw;
 }
 
 li {

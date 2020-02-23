@@ -38,15 +38,10 @@
     createAndAppend('p', ul, { text: `Forks : ${repo.forks}` });
     var dateobj = new Date(repo.updated_at);
     var updateDate = dateobj.toUTCString();
-
     createAndAppend('p', ul, { text: `Update at : ${updateDate}` });
   }
 
-  let reposBanner = document.createElement('H1');
-  reposBanner.innerHTML = 'HYF REPOSITORIES';
-  document.getElementById('root').appendChild(reposBanner);
-  reposBanner.className += 'banner';
-
+  /////////////////////////////////////////////////////////////////////MAIN FUNCTION STARTS HERE////////////////////////////////////////////////////////////////////////////////////////
   function main(url) {
     fetchJSON(url, (err, repos) => {
       // "repos" is a referrence to xhr response. all this is part of the predefined callback function
@@ -58,7 +53,7 @@
         });
         return;
       }
-      const ul = createAndAppend('ul', root);
+
       repos.sort(function(a, b) {
         return a.name.toUpperCase() > b.name.toUpperCase()
           ? 1
@@ -75,7 +70,18 @@
       repos = reposIndices;
       console.log(repos);
 
-      const select = createAndAppend('select', ul);
+      let reposBanner = document.createElement('H1');
+      reposBanner.innerHTML = 'HYF REPOSITORIES';
+      reposBanner.className += 'banner';
+
+      document.getElementById('root').appendChild(reposBanner);
+
+      const ul = createAndAppend('ul', root);
+      const select = createAndAppend('select', reposBanner);
+
+      let startingRepo = repos[0];
+
+      renderRepoDetails(startingRepo, ul);
 
       repos.forEach(repo => {
         let option = document.createElement('option');
@@ -86,7 +92,7 @@
         let selectBtn = document.querySelector('select');
         selectBtn.addEventListener('change', () => {
           if (selectBtn.value == repo.name) {
-            renderRepoDetails(repo, ul);
+            ul.replaceChild(repo, startingRepo);
           }
         });
       });
