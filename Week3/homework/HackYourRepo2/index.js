@@ -1,7 +1,7 @@
 'use strict';
 
 {
-    function fetchJSON(url, cb) {
+    async function fetchJSON(url, cb) {
         // const xhr = new XMLHttpRequest();
         // xhr.open('GET', url);
         // xhr.responseType = 'json';
@@ -15,24 +15,54 @@
         // xhr.onerror = () => cb(new Error('Network request failed'));
         // xhr.send();
 
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then((response) => {
-            if (!response.ok) {
+        // With fetch()
+        // fetch(url, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+        // })
+        //     .then((response) => {
+        //         if (!response.ok) {
+        //             throw response
+        //         }
+        //         return response.json()
+        //     })
+        //     .then((data) => {
+        //         cb(null, data);
+        //     })
+        //     .catch((err) => {
+        //         cb(new Error('Network request failed'));
+        //     });
+
+        /// With Axios
+        // const axios = require('axios');
+        // axios.get(url)
+        //     .then(function (response) {
+        //         if (response.status !== 200) {
+        //             throw response
+        //         }
+        //         return response.data
+        //     })
+        //     .then(function (data) {
+        //         cb(null, data);
+        //     })
+        //     .catch(function (error) {
+        //         cb(new Error('Network request failed'));
+        //     });
+
+
+        // With axios async await
+        try {
+            const response = await axios.get(url)
+            if (response.status !== 200) {
                 throw response
             }
-            return response.json()
-        })
-            .then((data) => {
-                cb(null, data);
-            })
-            .catch((err) => {
-                cb(new Error('Network request failed'));
-            });
+            const data = response.data;
+            cb(null, data);
+        } catch (error) {
+            cb(new Error('Network request failed'));
+        }
     }
 
     function createAndAppend(name, parent, options = {}) {

@@ -21,7 +21,7 @@
 
   class App {
     constructor(account) {
-      const containers = App.renderContainers();
+      const containers = App.renderContainers(account);
 
       const model = new Model(account);
       const fetchData = model.fetchData.bind(model);
@@ -34,14 +34,14 @@
       fetchData();
     }
 
-    static renderContainers() {
+    static renderContainers(account) {
       const root = document.getElementById('root');
-      const header = createAndAppend('header', root, { class: 'header' });
+      const header = createAndAppend('div', root, { class: 'header', text: account.name, id: 'hyf__header' });
       const error = createAndAppend('div', root);
-      const main = createAndAppend('main', root, {
+      const main = createAndAppend('div', root, {
         class: 'main-container',
       });
-      const repo = createAndAppend('section', main, {
+      const repo = createAndAppend('ul', main, {
         class: 'repo-container whiteframe',
       });
       const contributors = createAndAppend('section', main, {

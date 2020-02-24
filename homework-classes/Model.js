@@ -21,6 +21,7 @@
     async fetchData(id) {
       const repoId = parseInt(id, 10);
       this.state.error = null;
+
       try {
         if (this.state.repos.length === 0) {
           const repos = await Model.fetchJSON(makeUrl(this.account));
