@@ -11,14 +11,18 @@
   display: flex;
   justify-content: left;
   width: 45%;
+  font-weight: bold;
+  font-size: 2vw;
 }
 
 .repos {
   float: left;
+  width: 40%;
 }
 
 .contributors {
   float: right;
+  width: 40%;
 }
 
 ul {

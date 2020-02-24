@@ -1,5 +1,8 @@
 'use strict';
 
+let body = document.querySelector('body');
+body.id = 'body';
+
 {
   function fetchJSON(url, cb) {
     const xhr = new XMLHttpRequest();
@@ -14,6 +17,16 @@
     };
     xhr.onerror = () => cb(new Error('Network request failed'));
     xhr.send();
+  }
+
+  function fetchContributors(repo) {
+    fetch(repo.contributors_url)
+      .then(response => {
+        return response.json();
+      })
+      .then(contributors => {
+        console.log(contributors);
+      });
   }
 
   function createAndAppend(name, parent, options = {}) {
@@ -39,6 +52,19 @@
     var dateobj = new Date(repo.updated_at);
     var updateDate = dateobj.toUTCString();
     createAndAppend('p', ul, { text: `Update at : ${updateDate}` });
+  }
+
+  function renderContributors(contributors, contributorsBanner) {
+    contributors.forEach(contributor => {
+      let contLi = createAndAppend('li', contributorsBanner);
+      let contImage = createAndAppend('img', contributorsBanner);
+      contImage.setAttribute('href', contributor.avatar_url);
+
+      let contName = createAndAppend('p', contLi);
+      contName.innerHTML = contributor.login;
+      contLi.appendChild(contImage);
+      contImage.appendChild(contName);
+    });
   }
 
   /////////////////////////////////////////////////////////////////////MAIN FUNCTION STARTS HERE////////////////////////////////////////////////////////////////////////////////////////
@@ -68,13 +94,17 @@
       }
 
       repos = reposIndices;
-      console.log(repos);
-
-      let reposBanner = document.createElement('H1');
+      ///crreating repos banner
+      let reposBanner = document.createElement('section');
       reposBanner.innerHTML = 'HYF REPOSITORIES';
       reposBanner.className += 'banner';
+      ///creating contributors banner
+      let contributorsBanner = document.createElement('section');
+      contributorsBanner.className = ' contributors banner';
+      contributorsBanner.innerHTML = 'Contributors';
 
       document.getElementById('root').appendChild(reposBanner);
+      document.getElementById('root').appendChild(contributorsBanner);
 
       const ul = createAndAppend('ul', root);
       const select = createAndAppend('select', reposBanner);
@@ -82,6 +112,7 @@
       let startingRepo = repos[0];
 
       renderRepoDetails(startingRepo, ul);
+      fetchContributors(startingRepo);
 
       repos.forEach(repo => {
         let option = document.createElement('option');
@@ -90,9 +121,14 @@
         select.appendChild(option);
 
         let selectBtn = document.querySelector('select');
+        let li = document.querySelector('li');
+        let div = document.getElementById('root');
+
         selectBtn.addEventListener('change', () => {
           if (selectBtn.value == repo.name) {
-            ul.replaceChild(repo, startingRepo);
+            ul.innerHTML = ' ';
+            renderRepoDetails(repo, ul);
+            fetchContributors(repo);
           }
         });
       });
