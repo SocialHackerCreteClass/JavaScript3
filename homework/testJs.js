@@ -1,0 +1,3 @@
+function renderContributors(contributors) {
+  contributor;
+}

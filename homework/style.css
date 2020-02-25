@@ -1,3 +1,51 @@
 .alert-error {
   color: red;
+  background-color: pink;
+  padding: 2vh;
+}
+
+.banner {
+  background-color: blue;
+  color: white;
+  padding: 3%;
+  display: flex;
+  justify-content: left;
+  width: 45%;
+  font-weight: bold;
+  font-size: 2vw;
+}
+
+.repos {
+  float: left;
+  width: 40%;
+}
+
+.contributors {
+  float: right;
+  width: 40%;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  border-width: 2px;
+  border-style: groove;
+  padding: 2vw;
+  width: 45%;
+}
+
+select {
+  padding: 5px;
+  width: 10vw;
+  margin-left: 1.5vw;
+}
+
+li {
+  font-weight: bolder;
+  border-style: groove;
+  list-style-type: none;
+  display: inline-block;
+  margin: auto;
+  padding: 1.5vw;
+  margin-left: 0;
 }
