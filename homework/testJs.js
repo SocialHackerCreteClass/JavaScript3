@@ -1,3 +1,3 @@
-function renderContributors(repo) {
-  fetchContributors(repo);
+function renderContributors(contributors) {
+  contributor;
 }

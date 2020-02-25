@@ -19,14 +19,26 @@ body.id = 'body';
     xhr.send();
   }
 
+  function renderContributors(data, contributorsBanner) {
+    let container = document.createElement('div');
+    contributorsBanner.appendChild(container);
+    data.forEach(contributor => {
+      let image = document.createElement('img');
+      image.setAttribute('href', contributor.avatar_url);
+      let name = document.createElement('h5');
+      name.innerHTML = `${contributor.login}`;
+      container.appendChild(image);
+      container.appendChild(name);
+    });
+  }
+
   function fetchContributors(repo) {
+    var obj;
     fetch(repo.contributors_url)
-      .then(response => {
-        return response.json();
-      })
-      .then(contributors => {
-        console.log(contributors);
-      });
+      .then(res => res.json())
+      .then(data => (obj = data))
+      .then(() => console.log(obj))
+      .then(() => renderContributors(obj, contributorsBanner));
   }
 
   function createAndAppend(name, parent, options = {}) {
@@ -54,18 +66,14 @@ body.id = 'body';
     createAndAppend('p', ul, { text: `Update at : ${updateDate}` });
   }
 
-  function renderContributors(contributors, contributorsBanner) {
-    contributors.forEach(contributor => {
-      let contLi = createAndAppend('li', contributorsBanner);
-      let contImage = createAndAppend('img', contributorsBanner);
-      contImage.setAttribute('href', contributor.avatar_url);
-
-      let contName = createAndAppend('p', contLi);
-      contName.innerHTML = contributor.login;
-      contLi.appendChild(contImage);
-      contImage.appendChild(contName);
-    });
-  }
+  ///crreating repos banner
+  let reposBanner = document.createElement('section');
+  reposBanner.innerHTML = 'HYF REPOSITORIES';
+  reposBanner.className += 'banner';
+  ///creating contributors banner
+  let contributorsBanner = document.createElement('section');
+  contributorsBanner.className = ' contributors banner';
+  contributorsBanner.innerHTML = 'Contributors';
 
   /////////////////////////////////////////////////////////////////////MAIN FUNCTION STARTS HERE////////////////////////////////////////////////////////////////////////////////////////
   function main(url) {
@@ -94,14 +102,6 @@ body.id = 'body';
       }
 
       repos = reposIndices;
-      ///crreating repos banner
-      let reposBanner = document.createElement('section');
-      reposBanner.innerHTML = 'HYF REPOSITORIES';
-      reposBanner.className += 'banner';
-      ///creating contributors banner
-      let contributorsBanner = document.createElement('section');
-      contributorsBanner.className = ' contributors banner';
-      contributorsBanner.innerHTML = 'Contributors';
 
       document.getElementById('root').appendChild(reposBanner);
       document.getElementById('root').appendChild(contributorsBanner);
@@ -127,6 +127,7 @@ body.id = 'body';
         selectBtn.addEventListener('change', () => {
           if (selectBtn.value == repo.name) {
             ul.innerHTML = ' ';
+            contributorsBanner.innerHTML = ' ';
             renderRepoDetails(repo, ul);
             fetchContributors(repo);
           }
